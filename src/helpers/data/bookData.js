@@ -1,5 +1,5 @@
 import axios from 'axios';
-import firebaseConfig from '../apiKeys';
+import firebaseConfig from '../auth/apiKeys';
 
 const dbUrl = firebaseConfig.databaseURL;
 // const currentUserUid = firebase.auth().currentUser.uid;
