@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import firebase from 'firebase';
 import { getBooks } from '../helpers/data/bookData';
 import BookCard from './cards/BookCard';
+import BookForm from './forms/BookForm';
 
 function BooksPage() {
   const [books, setBooks] = useState([]);
@@ -17,6 +18,11 @@ function BooksPage() {
   return (
     <div className='card-container'>
       <h2>Books Page</h2>
+      <div className='form-container'>
+        <BookForm
+          setBooks = {setBooks}
+        />
+      </div>
       <div className='store'>
         { books.map((book, id) => <BookCard
           key={id}

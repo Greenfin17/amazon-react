@@ -3,14 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const BookCard = ({
-  key,
   image,
   title,
   sale,
   price,
   firebaseKey
 }) => (
-  <div className='card' id={key}>
+  <div className='card'>
     <img className='card-img-top' src={image} alt={title}
       style={{ height: '400px' }} />
     <div className='card-body' style={{ height: '180px' }}>
@@ -28,7 +27,6 @@ const BookCard = ({
 );
 
 BookCard.propTypes = {
-  key: PropTypes.number,
   image: PropTypes.string,
   title: PropTypes.string,
   sale: PropTypes.bool,

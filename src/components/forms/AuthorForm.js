@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { createAuthor, updateAuthor } from '../../helpers/data/authorData';
+// import { createAuthor, updateAuthor } from '../../helpers/data/authorData';
 
 const AuthorForm = ({
   firebaseKey,
@@ -9,7 +9,7 @@ const AuthorForm = ({
   lastName,
   email,
   favorite,
-  setAuthors
+//  setAuthors
 }) => {
   const [author, setAuthor] = useState({
     firebaseKey: firebaseKey || null,
@@ -19,6 +19,7 @@ const AuthorForm = ({
     favorite: favorite || false,
   });
   const handleInputChange = (e) => {
+    console.warn(e.target.id);
     setAuthor((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -28,9 +29,10 @@ const AuthorForm = ({
     e.preventDefault();
     // add an Author
     if (author.firebaseKey) {
-      updateAuthor(author.firebaseKey, author).then((authorArray) => setAuthors(authorArray));
+      console.warn(author.firebaseKey);
+      // updateAuthor(author.firebaseKey, author).then((authorArray) => setAuthors(authorArray));
     } else {
-      createAuthor(author).then((authorArray) => setAuthors(authorArray));
+      console.warn(author);
     }
   };
 
@@ -69,7 +71,7 @@ AuthorForm.propTypes = {
   lastName: PropTypes.string,
   email: PropTypes.string,
   favorite: PropTypes.bool,
-  setAuthors: PropTypes.func.isRequired
+//  setAuthors: PropTypes.func.isRequired
 };
 
 export default AuthorForm;

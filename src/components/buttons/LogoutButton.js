@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import signOut from '../../helpers/auth/signOut';
 
-const LogoutButton = ({ loginCheck }) => {
+const LogoutButton = ({ checkLoggedIn }) => {
   const handleClick = () => {
     signOut().then(() => {
-      loginCheck();
+      checkLoggedIn();
     });
   };
   return (
@@ -19,7 +19,7 @@ const LogoutButton = ({ loginCheck }) => {
 };
 
 LogoutButton.propTypes = {
-  loginCheck: PropTypes.func.isRequired
+  checkLoggedIn: PropTypes.func.isRequired
 };
 
 export default LogoutButton;
