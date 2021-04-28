@@ -5,7 +5,7 @@ import { Nav } from 'reactstrap';
 // import LogoutButton from '../components/buttons/LogoutButton';
 import signOut from '../helpers/auth/signOut';
 
-const Navbar = ({ checkLoggedIn, setPage }) => {
+const Navbar1 = ({ checkLoggedIn, setPage }) => {
   const logoutClick = () => {
     signOut().then(() => {
       checkLoggedIn();
@@ -73,4 +73,4 @@ Navbar.propTypes = {
   setPage: PropTypes.func.isRequired
 };
 
-export default Navbar;
+export default Navbar1;

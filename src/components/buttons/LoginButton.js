@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import signIn from '../../helpers/auth/signIn';
-import checkAppStatus from '../../helpers/routers/checkAppStatus';
+import checkAppStatus from '../../helpers/auth/checkAppStatus';
 
 const LoginButton = ({ checkLoggedIn }) => {
   const handleClick = () => {
