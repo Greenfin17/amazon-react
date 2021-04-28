@@ -11,7 +11,7 @@ import Routes from '../helpers/Routes';
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [authors, setAuthors] = useState([]);
-
+  const [books, setBooks] = useState([]);
   const checkLoggedIn = () => {
     if (loggedIn) {
       setLoggedIn(false);
@@ -22,16 +22,21 @@ function App() {
 
   return (
     <div className='App'>
-      <div className='main-container'>
-       { !loggedIn && <LoginButton checkLoggedIn={checkLoggedIn} /> }
-        <Router>
-          { loggedIn && <NavBar checkLoggedIn={checkLoggedIn} /> }
+      { !loggedIn && <LoginButton checkLoggedIn={checkLoggedIn}
+        setAuthors={setAuthors}
+        setBooks={setBooks} /> }
+      <Router>
+        { loggedIn && <NavBar checkLoggedIn={checkLoggedIn} /> }
+        <div className='main-container'>
           <Routes
             authors={authors}
             setAuthors={setAuthors}
+            books={books}
+            setBooks={setBooks}
+            loggedIn={loggedIn}
           />
-        </Router>
-      </div>
+        </div>
+      </Router>
     </div>
   );
 }

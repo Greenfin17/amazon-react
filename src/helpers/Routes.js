@@ -4,19 +4,27 @@ import PropTypes from 'prop-types';
 import Books from '../views/Books';
 import Authors from '../views/Authors';
 
-export default function Routes({ authors, setAuthors }) {
+export default function Routes({
+  authors, setAuthors,
+  books, setBooks,
+  loggedIn
+}) {
   return (
     <div>
       <Switch>
         <Route
-          path='/books'
-          component={Books}
+          path='/books/'
+          component={() => <Books
+          books={books}
+          setBooks={setBooks}
+          loggedIn={loggedIn} /> }
         />
         <Route
           path='/authors'
           component={() => <Authors
             authors={authors}
-            setAuthors={setAuthors} />}
+            setAuthors={setAuthors}
+            loggedIn={loggedIn} />}
         />
       </Switch>
     </div>
@@ -25,5 +33,8 @@ export default function Routes({ authors, setAuthors }) {
 
 Routes.propTypes = {
   authors: PropTypes.array.isRequired,
-  setAuthors: PropTypes.func.isRequired
+  setAuthors: PropTypes.func.isRequired,
+  books: PropTypes.array.isRequired,
+  setBooks: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired
 };

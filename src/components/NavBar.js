@@ -12,7 +12,7 @@ import {
 // import checkAppStatus from '../helpers/auth/checkAppStatus';
 import LogoutButton from './buttons/LogoutButton';
 
-const NavBar = ({ checkedLoggedIn }) => {
+const NavBar = ({ checkLoggedIn }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -31,7 +31,7 @@ const NavBar = ({ checkedLoggedIn }) => {
               <Link className="nav-link" to="/Authors">Authors</Link>
             </NavItem>
           </Nav>
-          <LogoutButton checkedLoggedIn={checkedLoggedIn} />
+          <LogoutButton checkLoggedIn={checkLoggedIn} />
         </Collapse>
       </Navbar>
     </div>
@@ -39,7 +39,7 @@ const NavBar = ({ checkedLoggedIn }) => {
 };
 
 NavBar.propTypes = {
-  checkedLoggedIn: PropTypes.func.isRequired
+  checkLoggedIn: PropTypes.func.isRequired
 };
 
 export default NavBar;
