@@ -24,22 +24,8 @@ const AuthorForm = ({
   const handleInputChange = (e) => {
     setAuthor((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.name !== 'favorite' ? e.target.value : e.target.checked
     }));
-  };
-
-  const handleCheckboxChange = (e) => {
-    if (e.target.checked) {
-      setAuthor((prevState) => ({
-        ...prevState,
-        [e.target.name]: true
-      }));
-    } else {
-      setAuthor((prevState) => ({
-        ...prevState,
-        [e.target.name]: false
-      }));
-    }
   };
 
   const handleSubmit = (e) => {
@@ -72,8 +58,8 @@ const AuthorForm = ({
         </div>
         <div className='form-check'>
           <input type='checkbox' className='form-check-input'
-            name='favorite' checked={author.favorite ? 'checked' : ''}
-            value='true' onChange={handleCheckboxChange}/>
+            name='favorite' checked={author.favorite}
+            value='true' onChange={handleInputChange}/>
           <label className='form-check-label' htmlFor ='favorite'>Favorite?</label>
         </div>
         <Button type='submit' className='btn btn-primary'

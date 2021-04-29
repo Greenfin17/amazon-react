@@ -21,7 +21,7 @@ const AuthorCard = ({
 
   return (
     <>
-      <div className='card' id={firebaseKey}>
+      <div className='card author-card' id={firebaseKey}>
         <div className="card-body" style={{ height: '180px' }}>
           <a href='#'>
             <h5 className="card-title">{firstName} {lastName}</h5>
@@ -32,15 +32,15 @@ const AuthorCard = ({
             onClick={handleEditClick} data-toggle="modal" data-target="#formModal">Edit Author</button>
           <button className="btn btn-danger">Delete Author</button>
         </div>
+        { showEditForm && <AuthorForm
+            firebaseKey={firebaseKey}
+            firstName={firstName}
+            lastName={lastName}
+            email={email}
+            favorite={favorite}
+            setAuthors={setAuthors}
+        /> }
       </div>
-      { showEditForm && <AuthorForm
-          firebaseKey={firebaseKey}
-          firstName={firstName}
-          lastName={lastName}
-          email={email}
-          favorite={favorite}
-          setAuthors={setAuthors}
-      /> }
     </>
   );
 };
