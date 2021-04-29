@@ -15,17 +15,33 @@ const AuthorForm = ({
   const [author, setAuthor] = useState({
     firebaseKey: firebaseKey || null,
     uid: firebase.auth().currentUser.uid,
-    firstName: firstName || '',
-    lastName: lastName || '',
+    first_name: firstName || '',
+    last_name: lastName || '',
     email: email || '',
     favorite: favorite || false,
   });
+  // const isChecked = favorite ? 'checked' : '';
   const handleInputChange = (e) => {
     setAuthor((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     }));
   };
+
+  const handleCheckboxChange = (e) => {
+    if (e.target.checked) {
+      setAuthor((prevState) => ({
+        ...prevState,
+        [e.target.name]: true
+      }));
+    } else {
+      setAuthor((prevState) => ({
+        ...prevState,
+        [e.target.name]: false
+      }));
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // add an Author
@@ -42,20 +58,22 @@ const AuthorForm = ({
         <div className='form-group'>
           <label htmlFor='first-name'>Author First Name</label>
           <input type='text' className='form-control' aria-describedby='authorName'
-            name='firstName' value={firstName} onChange={handleInputChange} placeholder='Enter Author First Name' required />
+            name='first_name' value={author.first_name} onChange={handleInputChange} placeholder='Enter Author First Name' required />
         </div>
         <div className='form-group'>
           <label htmlFor='last-name'>Last Name</label>
           <input type='text' className='form-control' id='last-name'
-            name='lastName' value={lastName} onChange={handleInputChange} placeholder='Last Name' required />
+            name='last_name' value={author.last_name} onChange={handleInputChange} placeholder='Last Name' required />
         </div>
         <div className='htmlForm-group'>
           <label htmlFor='email'>Email</label>
           <input type='email' className='form-control' id='email'
-            name='email' value={email} onChange={handleInputChange} placeholder='Email' required />
+            name='email' value={author.email} onChange={handleInputChange} placeholder='Email' required />
         </div>
         <div className='form-check'>
-          <input type='checkbox' className='form-check-input' name='favorite' />
+          <input type='checkbox' className='form-check-input'
+            name='favorite' checked={author.favorite ? 'checked' : ''}
+            value='true' onChange={handleCheckboxChange}/>
           <label className='form-check-label' htmlFor ='favorite'>Favorite?</label>
         </div>
         <Button type='submit' className='btn btn-primary'
