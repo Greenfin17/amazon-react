@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './App.scss';
 import firebase from 'firebase';
@@ -9,35 +9,53 @@ import NavBar from '../components/NavBar';
 import Routes from '../helpers/Routes';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
   const [authors, setAuthors] = useState([]);
   const [books, setBooks] = useState([]);
-  const checkLoggedIn = () => {
-    if (loggedIn) {
-      setLoggedIn(false);
-    } else if (firebase.auth().currentUser) {
-      setLoggedIn(true);
-    }
-  };
+  const [user, setUser] = useState(null);
+  const [singleAuthor, setSingleAuthor] = useState({
+    firebaseKey: '',
+    uid: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    favorite: false,
+  });
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((authed) => {
+      if (authed) {
+        const userInfoObj = {
+          fullName: authed.displayName,
+          profileImage: authed.photoURL,
+          uid: authed.uid,
+          username: authed.email.split('@gmail.com')[0]
+        };
+        setUser(userInfoObj);
+      } else if (user || user === null) {
+        setUser(false);
+      }
+    });
+  }, []);
 
   return (
-    <div className='App'>
-      { !loggedIn && <LoginButton checkLoggedIn={checkLoggedIn}
-        setAuthors={setAuthors}
-        setBooks={setBooks} /> }
-      <Router>
-        { loggedIn && <NavBar checkLoggedIn={checkLoggedIn} /> }
-        <div className='main-container'>
-          <Routes
-            authors={authors}
-            setAuthors={setAuthors}
-            books={books}
-            setBooks={setBooks}
-            loggedIn={loggedIn}
-          />
-        </div>
-      </Router>
-    </div>
+    <Router>
+      <div className='App'>
+        { !user && <LoginButton checkLoggedIn={setUser}
+          setAuthors={setAuthors}
+          setBooks={setBooks} /> }
+          { user && <NavBar checkLoggedIn={setUser} /> }
+          <div className='main-container'>
+            <Routes
+              authors={authors}
+              setAuthors={setAuthors}
+              books={books}
+              setBooks={setBooks}
+              user={user}
+              singleAuthor={singleAuthor}
+              setSingleAuthor={setSingleAuthor}
+            />
+          </div>
+      </div>
+    </Router>
   );
 }
 

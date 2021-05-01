@@ -4,18 +4,19 @@ import AuthorCard from '../components/cards/AuthorCard';
 import AddAuthorButton from '../components/buttons/AddAuthorButton';
 import AuthorForm from '../components/forms/AuthorForm';
 
-function Authors({ authors, setAuthors, loggedIn }) {
+function Authors({ authors, setAuthors, user }) {
   const [showAuthorForm, setShowAuthorForm] = useState(false);
   const [updateAuthor, setUpdateAuthor] = useState(false);
+  console.warn(user);
   return (
     <div className='authors'>
       <h2>Authors Page</h2>
-      { loggedIn && <AddAuthorButton
+      { user && <AddAuthorButton
         setShowAuthorForm={setShowAuthorForm}
         showAuthorForm={showAuthorForm}/> }
       { showAuthorForm && <AuthorForm setAuthors={setAuthors} /> }
       <div className='store'>
-        { loggedIn && authors.map((author) => <AuthorCard
+        { user && authors.map((author) => <AuthorCard
             setUpdateAuthor={setUpdateAuthor}
             updateAuthor={updateAuthor}
             setAuthors={setAuthors}
@@ -35,7 +36,7 @@ function Authors({ authors, setAuthors, loggedIn }) {
 Authors.propTypes = {
   authors: PropTypes.array.isRequired,
   setAuthors: PropTypes.func.isRequired,
-  loggedIn: PropTypes.bool.isRequired
+  user: PropTypes.object
 };
 
 export default Authors;

@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AuthorForm from '../forms/AuthorForm';
 
 const AuthorCard = ({
   firebaseKey,
   firstName,
   lastName,
   email,
-  favorite,
-  setAuthors,
 }) => {
-  const [showEditForm, setShowEditForm] = useState(false);
-  const handleEditClick = () => {
+  // const [showEditForm, setShowEditForm] = useState(false);
+  const history = useHistory();
+  /*
+    const handleEditClick = () => {
     if (showEditForm) {
       setShowEditForm(false);
     } else {
       setShowEditForm(true);
     }
+  };
+  */
+  const handleEditClick = () => {
+    history.push(`/edit-author/${firebaseKey}`);
   };
 
   return (
@@ -32,14 +36,6 @@ const AuthorCard = ({
             onClick={handleEditClick} data-toggle="modal" data-target="#formModal">Edit Author</button>
           <button className="btn btn-danger">Delete Author</button>
         </div>
-        { showEditForm && <AuthorForm
-            firebaseKey={firebaseKey}
-            firstName={firstName}
-            lastName={lastName}
-            email={email}
-            favorite={favorite}
-            setAuthors={setAuthors}
-        /> }
       </div>
     </>
   );

@@ -37,7 +37,7 @@ const getFavoriteAuthors = () => new Promise((resolve, reject) => {
 });
 
 // DELETE BOOKS BY AUTHOR
-const deleteBooksByAuthor = (firebaseKey, userId) => {
+const deleteBooksByAuthor = (userId, firebaseKey) => {
   getBooksByAuthor(firebaseKey).then((books) => {
     books.forEach((book) => {
       if (book.uid === userId) {
@@ -55,7 +55,7 @@ const deleteAuthors = (firebaseKey, userId) => new Promise((resolve, reject) => 
 });
 
 // CREATE AUTHOR
-const createAuthor = (authorObj, userId) => new Promise((resolve, reject) => {
+const createAuthor = (userId, authorObj) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/authors.json`, authorObj)
     .then((response) => {
       const body = { firebaseKey: response.data.name };
