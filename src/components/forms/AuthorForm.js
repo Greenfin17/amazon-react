@@ -6,7 +6,6 @@ import { Button } from 'reactstrap';
 import { createAuthor, getSingleAuthor, updateAuthor } from '../../helpers/data/authorData';
 
 const AuthorForm = ({
-  user,
   setAuthors,
   singleAuthor,
   setSingleAuthor
@@ -24,10 +23,9 @@ const AuthorForm = ({
     if (id) {
       getSingleAuthor(id).then((author) => setSingleAuthor(author));
     }
-  });
+  }, []);
 
   const handleSubmit = (e) => {
-    console.warn(user);
     e.preventDefault();
     // add an Author
     if (singleAuthor.firebaseKey) {

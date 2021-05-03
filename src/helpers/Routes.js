@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Home from '../views/Home';
+import NotFound from '../views/NotFound';
 import Books from '../views/Books';
 import Authors from '../views/Authors';
 import AuthorForm from '../components/forms/AuthorForm';
@@ -8,7 +10,7 @@ import AuthorForm from '../components/forms/AuthorForm';
 export default function Routes({
   authors, setAuthors,
   singleAuthor, setSingleAuthor,
-  books, setBooks,
+  books,
   user
 }) {
   return (
@@ -18,7 +20,6 @@ export default function Routes({
           path='/books/'
           component={() => <Books
           books={books}
-          setBooks={setBooks}
           user={user} /> }
         />
         <Route
@@ -44,6 +45,12 @@ export default function Routes({
             setSingleAuthor={setSingleAuthor}
             setAuthors={setAuthors} /> }
           />
+        <Route exact path='/'
+          component={() => <Home user={user} />}
+        />
+        <Route path='*'
+          component={NotFound}
+        />
       </Switch>
     </div>
   );
@@ -55,6 +62,5 @@ Routes.propTypes = {
   singleAuthor: PropTypes.object.isRequired,
   setSingleAuthor: PropTypes.func.isRequired,
   books: PropTypes.array.isRequired,
-  setBooks: PropTypes.func.isRequired,
-  user: PropTypes.object
+  user: PropTypes.any
 };

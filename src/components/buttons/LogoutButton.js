@@ -1,13 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import signOut from '../../helpers/auth/signOut';
 
-const LogoutButton = ({ checkLoggedIn }) => {
+const LogoutButton = () => {
+  const history = useHistory();
   const handleClick = () => {
     signOut().then(() => {
-      checkLoggedIn();
+      history.push('/');
     });
   };
+
   return (
     <div>
     <button id="google-auth" className="btn btn-danger ml-2"
@@ -16,10 +18,6 @@ const LogoutButton = ({ checkLoggedIn }) => {
         onClick={handleClick}></i><br />Log Out</button>
     </div>
   );
-};
-
-LogoutButton.propTypes = {
-  checkLoggedIn: PropTypes.func.isRequired
 };
 
 export default LogoutButton;

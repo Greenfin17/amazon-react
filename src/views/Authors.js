@@ -7,7 +7,6 @@ import AuthorForm from '../components/forms/AuthorForm';
 function Authors({ authors, setAuthors, user }) {
   const [showAuthorForm, setShowAuthorForm] = useState(false);
   const [updateAuthor, setUpdateAuthor] = useState(false);
-  console.warn(user);
   return (
     <div className='authors'>
       <h2>Authors Page</h2>
@@ -36,7 +35,7 @@ function Authors({ authors, setAuthors, user }) {
 Authors.propTypes = {
   authors: PropTypes.array.isRequired,
   setAuthors: PropTypes.func.isRequired,
-  user: PropTypes.object
+  user: PropTypes.any
 };
 
 export default Authors;

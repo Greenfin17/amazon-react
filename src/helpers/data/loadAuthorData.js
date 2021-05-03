@@ -8,11 +8,9 @@ const loadAuthorData = ({ authors, setAuthors }) => {
 
   useEffect(() => {
     getAuthors(userID).then((authorsArr) => {
-      console.warn(authorsArr);
       setAuthors(authorsArr);
     });
   }, []);
-  console.warn(typeof authors);
 };
 
 loadAuthorData.propTypes = {

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './App.scss';
 import firebase from 'firebase';
-// import BookForm from '../components/forms/BookForm';
 import LoginButton from '../components/buttons/LoginButton';
-// import LogoutButton from '../components/buttons/LogoutButton';
 import NavBar from '../components/NavBar';
 import Routes from '../helpers/Routes';
+import { getBooks } from '../helpers/data/bookData';
+import { getAuthors } from '../helpers/data/authorData';
 
 function App() {
   const [authors, setAuthors] = useState([]);
@@ -30,30 +30,35 @@ function App() {
           username: authed.email.split('@gmail.com')[0]
         };
         setUser(userInfoObj);
+        getAuthors(authed.uid).then((authorsArr) => {
+          setAuthors(authorsArr);
+        });
+        getBooks(authed.uid).then((booksArr) => {
+          setBooks(booksArr);
+        });
       } else if (user || user === null) {
         setUser(false);
       }
     });
   }, []);
-
   return (
     <Router>
       <div className='App'>
-        { !user && <LoginButton checkLoggedIn={setUser}
+        { !user && <LoginButton
           setAuthors={setAuthors}
           setBooks={setBooks} /> }
-          { user && <NavBar checkLoggedIn={setUser} /> }
-          <div className='main-container'>
-            <Routes
-              authors={authors}
-              setAuthors={setAuthors}
-              books={books}
-              setBooks={setBooks}
-              user={user}
-              singleAuthor={singleAuthor}
-              setSingleAuthor={setSingleAuthor}
-            />
-          </div>
+        { user && <NavBar /> }
+        <div className='main-container'>
+          <Routes
+            authors={authors}
+            setAuthors={setAuthors}
+            books={books}
+            setBooks={setBooks}
+            user={user}
+            singleAuthor={singleAuthor}
+            setSingleAuthor={setSingleAuthor}
+          />
+        </div>
       </div>
     </Router>
   );

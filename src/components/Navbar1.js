@@ -1,20 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Nav } from 'reactstrap';
+import useHistory from 'react-router-dom';
+
 // import LoginButton from '../components/buttons/LoginButton';
 // import LogoutButton from '../components/buttons/LogoutButton';
 import signOut from '../helpers/auth/signOut';
 
-const Navbar1 = ({ checkLoggedIn, setPage }) => {
+const Navbar1 = () => {
+  const history = useHistory();
   const logoutClick = () => {
     signOut().then(() => {
-      checkLoggedIn();
+      history.push('/');
     });
-  };
-
-  const pageClick = (e) => {
-    console.warn(e.target.id);
-    setPage(e.target.id);
   };
 
   return (
@@ -66,11 +63,6 @@ const Navbar1 = ({ checkLoggedIn, setPage }) => {
       </div>
     </Nav>
   );
-};
-
-Navbar.propTypes = {
-  checkLoggedIn: PropTypes.func.isRequired,
-  setPage: PropTypes.func.isRequired
 };
 
 export default Navbar1;

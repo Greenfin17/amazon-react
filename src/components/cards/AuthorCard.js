@@ -8,17 +8,7 @@ const AuthorCard = ({
   lastName,
   email,
 }) => {
-  // const [showEditForm, setShowEditForm] = useState(false);
   const history = useHistory();
-  /*
-    const handleEditClick = () => {
-    if (showEditForm) {
-      setShowEditForm(false);
-    } else {
-      setShowEditForm(true);
-    }
-  };
-  */
   const handleEditClick = () => {
     history.push(`/edit-author/${firebaseKey}`);
   };
@@ -46,8 +36,7 @@ AuthorCard.propTypes = {
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   email: PropTypes.string,
-  favorite: PropTypes.bool,
-  setAuthors: PropTypes.func
+  favorite: PropTypes.bool
 };
 
 export default AuthorCard;

@@ -22,7 +22,7 @@ function Books({ books, user }) {
 
 Books.propTypes = {
   books: PropTypes.array.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.any
 };
 
 export default Books;

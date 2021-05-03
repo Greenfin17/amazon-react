@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import {
   Collapse,
   Navbar,
@@ -12,7 +11,7 @@ import {
 // import checkAppStatus from '../helpers/auth/checkAppStatus';
 import LogoutButton from './buttons/LogoutButton';
 
-const NavBar = ({ checkLoggedIn }) => {
+const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -20,7 +19,7 @@ const NavBar = ({ checkLoggedIn }) => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">React</NavbarBrand>
+        <NavbarBrand href="/">Almost Amazon</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -31,15 +30,11 @@ const NavBar = ({ checkLoggedIn }) => {
               <Link className="nav-link" to="/Authors">Authors</Link>
             </NavItem>
           </Nav>
-          <LogoutButton checkLoggedIn={checkLoggedIn} />
+          <LogoutButton />
         </Collapse>
       </Navbar>
     </div>
   );
-};
-
-NavBar.propTypes = {
-  checkLoggedIn: PropTypes.func.isRequired
 };
 
 export default NavBar;

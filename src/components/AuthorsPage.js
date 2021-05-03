@@ -10,11 +10,9 @@ function AuthorsPage() {
 
   useEffect(() => {
     getAuthors(userID).then((authorsArr) => {
-      console.warn(authorsArr);
       setAuthors(authorsArr);
     });
   }, []);
-  console.warn(typeof authors);
 
   return (
     <div className='authors'>

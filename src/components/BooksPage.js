@@ -13,7 +13,6 @@ function BooksPage() {
       setBooks(booksArr);
     });
   }, []);
-  console.warn(typeof books);
 
   return (
     <div className='card-container'>
