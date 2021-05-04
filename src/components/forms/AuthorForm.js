@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useParams, useHistory } from 'react-router-dom';
 import { Button } from 'reactstrap';
 // import firebase from 'firebase';
 import { createAuthor, getSingleAuthor, updateAuthor } from '../../helpers/data/authorData';
 
-const AuthorForm = () => {
+const AuthorForm = ({
+  setAuthors
+}) => {
   const [singleAuthor, setSingleAuthor] = useState({
     firebaseKey: '',
     uid: '',
@@ -14,6 +17,7 @@ const AuthorForm = () => {
     favorite: false,
   });
   const { id } = useParams();
+  const history = useHistory();
   // const isChecked = favorite ? 'checked' : '';
   const handleInputChange = (e) => {
     setSingleAuthor((prevState) => ({
@@ -26,9 +30,11 @@ const AuthorForm = () => {
     e.preventDefault();
     // add an Author
     if (singleAuthor.firebaseKey) {
-      updateAuthor(id, singleAuthor.firebaseKey, singleAuthor);
+      updateAuthor(id, singleAuthor.firebaseKey, singleAuthor).then((authorArr) => setAuthors(authorArr));
+      history.push('/authors');
     } else {
-      createAuthor(singleAuthor.uid, singleAuthor);
+      createAuthor(singleAuthor.uid, singleAuthor).then((authorArr) => setAuthors(authorArr));
+      history.push('/authors');
     }
   };
 
@@ -65,6 +71,10 @@ const AuthorForm = () => {
       </form>
     </div>
   );
+};
+
+AuthorForm.propTypes = {
+  setAuthors: PropTypes.func
 };
 
 export default AuthorForm;

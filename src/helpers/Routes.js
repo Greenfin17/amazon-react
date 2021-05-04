@@ -9,7 +9,6 @@ import AuthorForm from '../components/forms/AuthorForm';
 
 export default function Routes({
   authors, setAuthors,
-  singleAuthor, setSingleAuthor,
   books,
   user
 }) {
@@ -33,16 +32,12 @@ export default function Routes({
           path='/add-author'
           component={() => <AuthorForm
             user={user}
-            singleAuthor={singleAuthor}
-            setSingleAuthor={setSingleAuthor}
             setAuthors={setAuthors} /> }
         />
         <Route
           path='/edit-author/:id'
           component={() => <AuthorForm
             user={user}
-            singleAuthor={singleAuthor}
-            setSingleAuthor={setSingleAuthor}
             setAuthors={setAuthors} /> }
           />
         <Route exact path='/'
@@ -59,8 +54,6 @@ export default function Routes({
 Routes.propTypes = {
   authors: PropTypes.array.isRequired,
   setAuthors: PropTypes.func.isRequired,
-  singleAuthor: PropTypes.object.isRequired,
-  setSingleAuthor: PropTypes.func.isRequired,
   books: PropTypes.array.isRequired,
   user: PropTypes.any
 };

@@ -12,14 +12,6 @@ function App() {
   const [authors, setAuthors] = useState([]);
   const [books, setBooks] = useState([]);
   const [user, setUser] = useState(null);
-  const [singleAuthor, setSingleAuthor] = useState({
-    firebaseKey: '',
-    uid: '',
-    first_name: '',
-    last_name: '',
-    email: '',
-    favorite: false,
-  });
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
       if (authed) {
@@ -55,8 +47,6 @@ function App() {
             books={books}
             setBooks={setBooks}
             user={user}
-            singleAuthor={singleAuthor}
-            setSingleAuthor={setSingleAuthor}
           />
         </div>
       </div>
