@@ -13,17 +13,13 @@ const AuthorForm = ({
   const { id } = useParams();
   // const isChecked = favorite ? 'checked' : '';
   const handleInputChange = (e) => {
+    console.warn(e.target.name);
+    console.warn('handleInputChange');
     setSingleAuthor((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.name !== 'favorite' ? e.target.value : e.target.checked
     }));
   };
-
-  useEffect(() => {
-    if (id) {
-      getSingleAuthor(id).then((author) => setSingleAuthor(author));
-    }
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,9 +32,10 @@ const AuthorForm = ({
   };
 
   useEffect(() => {
-    getSingleAuthor(id)
-      .then();
-  });
+    if (id) {
+      getSingleAuthor(id).then((author) => setSingleAuthor(author));
+    }
+  }, []);
 
   return (
     <div className='form-container'>
