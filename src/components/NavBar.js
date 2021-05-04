@@ -20,7 +20,7 @@ const NavBar = () => {
         <NavItem>
           <Link className='navbar-brand' to='/' >Almost Amazon</Link>
         </NavItem>
-    <NavbarToggler onClick={toggle} />
+      <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className='mr-auto' navbar>
             <NavItem>
