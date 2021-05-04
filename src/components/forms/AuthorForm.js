@@ -6,7 +6,8 @@ import { Button } from 'reactstrap';
 import { createAuthor, getSingleAuthor, updateAuthor } from '../../helpers/data/authorData';
 
 const AuthorForm = ({
-  setAuthors
+  setAuthors,
+  user
 }) => {
   const [singleAuthor, setSingleAuthor] = useState({
     firebaseKey: '',
@@ -30,10 +31,10 @@ const AuthorForm = ({
     e.preventDefault();
     // add an Author
     if (singleAuthor.firebaseKey) {
-      updateAuthor(id, singleAuthor.firebaseKey, singleAuthor).then((authorArr) => setAuthors(authorArr));
+      updateAuthor(user.uid, singleAuthor.firebaseKey, singleAuthor).then((authorArr) => setAuthors(authorArr));
       history.push('/authors');
     } else {
-      createAuthor(singleAuthor.uid, singleAuthor).then((authorArr) => setAuthors(authorArr));
+      createAuthor(user.uid, singleAuthor).then((authorArr) => setAuthors(authorArr));
       history.push('/authors');
     }
   };
@@ -74,7 +75,8 @@ const AuthorForm = ({
 };
 
 AuthorForm.propTypes = {
-  setAuthors: PropTypes.func
+  setAuthors: PropTypes.func,
+  user: PropTypes.any
 };
 
 export default AuthorForm;
