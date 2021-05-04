@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BookCard from '../components/cards/BookCard';
 
-function Books({ books, user }) {
+function Books({ books }) {
   return (
     <div className='card-container'>
       <h2>Books Page</h2>
       <div className='store'>
-        { user && books.map((book, id) => <BookCard
+        { books.map((book, id) => <BookCard
           key={id}
           image={book.image}
           title={book.title}
@@ -22,7 +22,6 @@ function Books({ books, user }) {
 
 Books.propTypes = {
   books: PropTypes.array.isRequired,
-  user: PropTypes.object.any
 };
 
 export default Books;

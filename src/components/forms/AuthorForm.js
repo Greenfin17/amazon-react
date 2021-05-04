@@ -1,20 +1,21 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from 'reactstrap';
 // import firebase from 'firebase';
 import { createAuthor, getSingleAuthor, updateAuthor } from '../../helpers/data/authorData';
 
-const AuthorForm = ({
-  setAuthors,
-  singleAuthor,
-  setSingleAuthor
-}) => {
+const AuthorForm = () => {
+  const [singleAuthor, setSingleAuthor] = useState({
+    firebaseKey: '',
+    uid: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    favorite: false,
+  });
   const { id } = useParams();
   // const isChecked = favorite ? 'checked' : '';
   const handleInputChange = (e) => {
-    console.warn(e.target.name);
-    console.warn('handleInputChange');
     setSingleAuthor((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.name !== 'favorite' ? e.target.value : e.target.checked
@@ -25,16 +26,14 @@ const AuthorForm = ({
     e.preventDefault();
     // add an Author
     if (singleAuthor.firebaseKey) {
-      updateAuthor(id, singleAuthor.firebaseKey, singleAuthor).then((singleAuthorArray) => setAuthors(singleAuthorArray));
+      updateAuthor(id, singleAuthor.firebaseKey, singleAuthor);
     } else {
-      createAuthor(singleAuthor.uid, singleAuthor).then((singleAuthorArray) => setAuthors(singleAuthorArray));
+      createAuthor(singleAuthor.uid, singleAuthor);
     }
   };
 
   useEffect(() => {
-    if (id) {
-      getSingleAuthor(id).then((author) => setSingleAuthor(author));
-    }
+    getSingleAuthor(id).then((author) => setSingleAuthor(author));
   }, []);
 
   return (
@@ -66,18 +65,6 @@ const AuthorForm = ({
       </form>
     </div>
   );
-};
-
-AuthorForm.propTypes = {
-  user: PropTypes.object,
-  singleAuthor: PropTypes.object,
-  setSingleAuthor: PropTypes.func,
-  firebaseKey: PropTypes.string,
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  email: PropTypes.string,
-  favorite: PropTypes.bool,
-  setAuthors: PropTypes.func.isRequired
 };
 
 export default AuthorForm;
