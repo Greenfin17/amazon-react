@@ -4,7 +4,6 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
 } from 'reactstrap';
@@ -13,21 +12,22 @@ import LogoutButton from './buttons/LogoutButton';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Almost Amazon</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
+      <Navbar color='light' light expand='md'>
+        <NavItem>
+          <Link className='navbar-brand' to='/' >Almost Amazon</Link>
+        </NavItem>
+    <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+          <Nav className='mr-auto' navbar>
             <NavItem>
-              <Link className="nav-link" to="/Books">Books</Link>
+              <Link className='nav-link' to='/Books'>Books</Link>
             </NavItem>
             <NavItem>
-              <Link className="nav-link" to="/Authors">Authors</Link>
+              <Link className='nav-link' to='/Authors'>Authors</Link>
             </NavItem>
           </Nav>
           <LogoutButton />
